@@ -1,0 +1,58 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  cursor: url("https://w7.pngwing.com/pngs/608/605/png-transparent-monkey-d-luffy-illustration-monkey-d-luffy-goku-nami-tony-tony-chopper-chibi-luffy-hand-boy-piracy-thumbnail.png"),
+    auto;
+  background-image: url("https://e0.pxfuel.com/wallpapers/330/158/desktop-wallpaper-one-piece-chibi-one-piece-thousand-sunny.jpg");
+}
+
+#Welcome {
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+h1,
+h2 {
+  font-size: 24px;
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  gap: 10px;
+  margin: 20px auto;
+}
+
+#game-container {
+  display: flex;
+  width: 100vw;
+  padding: 20px 0px;
+  justify-content: center;
+}
+
+.square {
+  width: 100px;
+  height: 100px;
+  background-color: lightblue;
+  border: 2px solid gray;
+  cursor: pointer;
+}
+
+#message {
+  font-size: 18px;
+  font-weight: bold;
+  color: green;
+}
+
+button {
+  font-size: 18px;
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#game {
+  background: url("treasure.png") center/contain no-repeat;
+}
