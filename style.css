@@ -1,24 +1,49 @@
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, sans-serif;
   text-align: center;
   cursor: url("https://w7.pngwing.com/pngs/608/605/png-transparent-monkey-d-luffy-illustration-monkey-d-luffy-goku-nami-tony-tony-chopper-chibi-luffy-hand-boy-piracy-thumbnail.png"),
     auto;
-  background-image: url("https://e0.pxfuel.com/wallpapers/330/158/desktop-wallpaper-one-piece-chibi-one-piece-thousand-sunny.jpg");
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: url("https://c4.wallpaperflare.com/wallpaper/965/883/624/manga-one-piece-wallpaper-preview.jpg");
+  background-repeat: no-repeat;
 }
 
+/*img.fondecran {
+  min-height: 100%;
+  min-width: 1024px;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+}*/
+
+/*@media screen and (max-width: 1024px) {
+  img.fondecran {
+    left: 50%;
+    margin-left: -512px;
+  }
+}*/
+
 #Welcome {
-  margin: 20px auto;
   max-width: 800px;
+  padding: 20px;
+  border-radius: 10px;
 }
 
 h1,
 h2 {
-  font-size: 24px;
+  font-size: 50px;
 }
 
 #board {
   display: grid;
-  grid-template-columns: repeat(4, 100px);
+  grid-template-columns: repeat(5, 1fr);
   gap: 10px;
   margin: 20px auto;
 }
@@ -41,7 +66,7 @@ h2 {
 #message {
   font-size: 18px;
   font-weight: bold;
-  color: green;
+  color: red;
 }
 
 button {
@@ -54,5 +79,13 @@ button {
 }
 
 #game {
-  background: url("treasure.png") center/contain no-repeat;
+  display: none;
+}
+
+.highlight {
+  background-color: blue;
+}
+
+.player {
+  background-color: chartreuse;
 }
