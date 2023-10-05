@@ -39,7 +39,7 @@ function move(direction) {
   const offset = getOffset(direction);
   const nextCell = cells[playerPosition + offset];
 
-  if (!nextCell || nextCell.dataset.order) return;
+  if (!nextCell) return;
 
   // if (validateMove(nextCell)) {
   //   hidePlayer();
@@ -53,15 +53,16 @@ function move(direction) {
     displayPlayer();
   }
 
-  if (nextCell.dataset.order) {
-    //   hidePlayer();
-    //   playerPosition += offset;
-    //   displayPlayer();
-    // } else {
-    lives--;
-    livesSpan.textContent = lives;
-    message.textContent = " You lose a life!";
-  }
+  // checkClick(nextCell);
+  // if (nextCell.dataset.order) {
+  //   //   hidePlayer();
+  //   //   playerPosition += offset;
+  //   //   displayPlayer();
+  //   // } else {
+  //   lives--;
+  //   livesSpan.textContent = lives;
+  //   message.textContent = " You lose a life!";
+  // }
 
   if (playerPosition === maps[currentLevel].end) {
     console.log("won the gane");
