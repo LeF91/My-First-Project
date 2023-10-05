@@ -8,11 +8,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: auto;
   background-image: url("https://c4.wallpaperflare.com/wallpaper/965/883/624/manga-one-piece-wallpaper-preview.jpg");
   background-repeat: no-repeat;
+  background-size: cover;
 }
 
+div {
+  text-align: center;
+}
 /*img.fondecran {
   min-height: 100%;
   min-width: 1024px;
@@ -34,11 +38,20 @@ body {
   max-width: 800px;
   padding: 20px;
   border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
 h1,
 h2 {
   font-size: 50px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: gainsboro;
 }
 
 #board {

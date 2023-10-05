@@ -6,7 +6,6 @@ const gameDiv = document.getElementById("game");
 const board = document.getElementById("board");
 const message = document.getElementById("message");
 const scoreSpan = document.getElementById("score");
-const livesSpan = document.getElementById("lives");
 
 let predefinedPath = [];
 let step = 0;
@@ -39,18 +38,29 @@ function move(direction) {
   if (!canMove) return;
   const offset = getOffset(direction);
   const nextCell = cells[playerPosition + offset];
-  if (!nextCell) return;
+
+  if (!nextCell || nextCell.dataset.order) return;
+
   // if (validateMove(nextCell)) {
-  //  hidePlayer();
-  //playerPosition = nextCell;
-  //displayPath();
+  //   hidePlayer();
+  //   playerPosition = nextCell;
+  //   displayPath();
+  // }
 
-  //   console.log(nextCell.dataset.order);
-
-  if (nextCell.dataset.order) {
+  if (nextCell) {
     hidePlayer();
     playerPosition += offset;
     displayPlayer();
+  }
+
+  if (nextCell.dataset.order) {
+    //   hidePlayer();
+    //   playerPosition += offset;
+    //   displayPlayer();
+    // } else {
+    lives--;
+    livesSpan.textContent = lives;
+    message.textContent = " You lose a life!";
   }
 
   if (playerPosition === maps[currentLevel].end) {
@@ -110,10 +120,10 @@ function checkClick(index) {
       gameInProgress = false;
       setTimeout(() => {
         pathLength++;
-        displayTime = 4000;
+        displayTime = 500;
         livesSpan.textContent = lives;
         startGame();
-      }, 1000);
+      }, 500);
     }
   } else {
     if (playerPosition !== predefinedPath[step]) {
@@ -121,18 +131,17 @@ function checkClick(index) {
       livesSpan.textContent = lives;
       message.textContent = "You lose a life.";
       //speak(""); ajouter la voix de Zoro//
-      if (lives === 0) {
-        message.textContent = "You lost! Go to Impel Down!";
-        // speak//
-        gameInProgress = false;
-        welcome.style.display = "block";
-        gameDiv.style.display = "none";
-        score = 0;
-        lives = 3;
-        scoreSpan.textContent = score;
-        livesSpan.textContent = lives;
-        pathLength = 4;
-      }
+    }
+    if (lives === 0) {
+      alert("Game Over! Go to Impel Down.");
+
+      welcome.style.display = "block";
+      gameDiv.style.display = "none";
+      score = 0;
+      lives = 3;
+      scoreSpan.textContent = score;
+      livesSpan.textContent = lives;
+      pathLength = 4;
     }
   }
 }
@@ -150,7 +159,7 @@ function startGame() {
   }
   step = 0;
   message.textContent = "";
-  gameInProgress = true;
+  gameInProgress = false;
   playerPosition = maps[currentLevel].start;
   predefinedPath = generatePath(pathLength);
   // speak ("Let's start the game ")//
@@ -158,20 +167,24 @@ function startGame() {
 }
 
 let playerPosition;
+const livesSpan = document.getElementById("lives");
 
 function endGame() {
   gameInProgress = false;
-  setTimeout(() => {
-    currentLevel++;
-    if (currentLevel >= Object.keys(maps).length) {
-      currentLevel = 0;
-    }
-    pathLength++;
-    displayTime = 4000;
-    livesSpan.textContent = lives;
-    clearBoard();
-    startGame();
-  }, 1000);
+
+  if (lives > 0) {
+    setTimeout(() => {
+      currentLevel++;
+      if (currentLevel >= Object.keys(maps).length) {
+        currentLevel = 0;
+      }
+      pathLength++;
+      displayTime = 500;
+      livesSpan.textContent = lives;
+      clearBoard();
+      startGame();
+    }, 1000);
+  }
 }
 
 function clearBoard() {
@@ -201,7 +214,7 @@ function displayPath(order = 1) {
   setTimeout(() => {
     order += 1;
     displayPath(order);
-  }, 200);
+  }, 100);
 }
 function removeHighlight(order = 1) {
   const cell = document.querySelector(`[data-order="${order}"]`);
@@ -214,11 +227,12 @@ function removeHighlight(order = 1) {
   setTimeout(() => {
     order += 1;
     removeHighlight(order);
-  }, 200);
+  }, 100);
 }
 
 function hidePlayer() {
   cells[playerPosition].classList.remove("player");
+  displayPlayer();
 }
 
 function displayPlayer() {
@@ -243,5 +257,3 @@ function displayPlayer() {
 //       }, 1000);
 //     }
 //   }, displayTime / pathLength);
-
-// function speak(text){}//
