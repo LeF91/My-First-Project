@@ -17,6 +17,6 @@ The goal was to make a "Maze/Memory"  game that would run and deploy in a browse
 
 # Let's Play !
 
-<a href="https://github.com/LeF91/My-First-Project/deployments/github-pages">link to my game</a>
+<a href="https://lef91.github.io/My-First-Project/">link to my game</a>
 
 
