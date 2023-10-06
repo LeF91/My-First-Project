@@ -6,7 +6,11 @@ const gameDiv = document.getElementById("game");
 const board = document.getElementById("board");
 const message = document.getElementById("message");
 const scoreSpan = document.getElementById("score");
-
+const endGameElement = document.getElementById("game-end");
+const gameContainer = document.getElementById("game-container");
+const restart = document.getElementById("restart");
+let playerPosition;
+const livesSpan = document.getElementById("lives");
 let predefinedPath = [];
 let step = 0;
 let gameInProgress = false;
@@ -47,22 +51,33 @@ function move(direction) {
   //   displayPath();
   // }
 
-  if (nextCell) {
+  // if (nextCell) {
+  //   hidePlayer();
+  //   playerPosition += offset;
+  //   displayPlayer();
+  // }
+
+  // checkClick(nextCell);
+  if (nextCell.dataset.order) {
     hidePlayer();
     playerPosition += offset;
     displayPlayer();
-  }
+  } else {
+    hidePlayer();
+    playerPosition += offset;
+    displayPlayer();
+    lives--;
 
-  // checkClick(nextCell);
-  // if (nextCell.dataset.order) {
-  //   //   hidePlayer();
-  //   //   playerPosition += offset;
-  //   //   displayPlayer();
-  //   // } else {
-  //   lives--;
-  //   livesSpan.textContent = lives;
-  //   message.textContent = " You lose a life!";
-  // }
+    livesSpan.textContent = lives;
+    if (lives === 0) {
+      endGameElement.classList.remove("hidden");
+      gameContainer.style.display = "none";
+    }
+    message.textContent = " You lose a life!";
+    setTimeout(() => {
+      message.textContent = "";
+    }, 500);
+  }
 
   if (playerPosition === maps[currentLevel].end) {
     console.log("won the gane");
@@ -108,49 +123,53 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-function checkClick(index) {
-  if (!gameInProgress) return;
+// function checkClick(index) {
+//   if (!gameInProgress) return;
 
-  if (index === predefinedPath[step]) {
-    step++;
-    if (step === predefinedPath.length) {
-      score++;
-      scoreSpan.textContent = score;
-      message.textContent = "Congratulations! You have the One Piece!";
-      //speak(""); ajouter la voix luffy//
-      gameInProgress = false;
-      setTimeout(() => {
-        pathLength++;
-        displayTime = 500;
-        livesSpan.textContent = lives;
-        startGame();
-      }, 500);
-    }
-  } else {
-    if (playerPosition !== predefinedPath[step]) {
-      lives--;
-      livesSpan.textContent = lives;
-      message.textContent = "You lose a life.";
-      //speak(""); ajouter la voix de Zoro//
-    }
-    if (lives === 0) {
-      alert("Game Over! Go to Impel Down.");
+//   if (index === predefinedPath[step]) {
+//     step++;
+//     if (step === predefinedPath.length) {
+//       score++;
+//       scoreSpan.textContent = score;
+//       message.textContent = "Congratulations! You have the One Piece!";
+//       //speak(""); ajouter la voix luffy//
+//       gameInProgress = false;
+//       setTimeout(() => {
+//         pathLength++;
+//         displayTime = 500;
+//         livesSpan.textContent = lives;
+//         startGame();
+//       }, 500);
+//     }
+//   } else {
+//     if (playerPosition !== predefinedPath[step]) {
+//       lives--;
+//       livesSpan.textContent = lives;
+//       message.textContent = "You lose a life.";
+//       //speak(""); ajouter la voix de Zoro//
+//     }
+//     if (lives === 0) {
+//       alert("Game Over! Go to Impel Down.");
 
-      welcome.style.display = "block";
-      gameDiv.style.display = "none";
-      score = 0;
-      lives = 3;
-      scoreSpan.textContent = score;
-      livesSpan.textContent = lives;
-      pathLength = 4;
-    }
-  }
-}
+//       welcome.style.display = "block";
+//       gameDiv.style.display = "none";
+//       score = 0;
+//       lives = 3;
+//       scoreSpan.textContent = score;
+//       livesSpan.textContent = lives;
+//       pathLength = 4;
+//     }
+//   }
+// }
 
 startButton.addEventListener("click", () => {
   welcome.style.display = "none";
   gameDiv.style.display = "block";
   startGame();
+});
+
+restart.addEventListener("click", () => {
+  location.reload();
 });
 
 function startGame() {
@@ -166,9 +185,6 @@ function startGame() {
   // speak ("Let's start the game ")//
   displayPath();
 }
-
-let playerPosition;
-const livesSpan = document.getElementById("lives");
 
 function endGame() {
   gameInProgress = false;

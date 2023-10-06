@@ -46,11 +46,12 @@ div {
 }
 
 h1,
-h2 {
+h2,
+h3 {
   font-size: 50px;
   text-align: center;
   margin-bottom: 20px;
-  color: gainsboro;
+  color: antiquewhite;
 }
 
 #board {
@@ -87,10 +88,13 @@ button {
   background-color: #3498db;
   color: white;
   border: none;
-  cursor: pointer;
 }
 
 #game {
+  display: none;
+}
+
+.hidden {
   display: none;
 }
 
@@ -100,4 +104,8 @@ button {
 
 .player {
   background-color: chartreuse;
+}
+
+#game-end {
+  height: 100vh;
 }
